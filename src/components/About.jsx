@@ -3,8 +3,8 @@
 import { motion } from "framer-motion";
 import { Server, LayoutDashboard, Database, CheckCircle2 } from "lucide-react";
 
-export default function About() {
-  const experiences = [
+export default function About({ lang }) {
+  const experiences = lang === "pt" ? [
     {
       icon: <Server className="text-brand-accent mb-4" size={32} />,
       title: "Backend & APIs",
@@ -20,15 +20,58 @@ export default function About() {
       title: "Arquitetura de Dados",
       description: "Modelagem de banco de dados, otimização de consultas e sistemas financeiros de alta confiabilidade."
     }
+  ] : [
+    {
+      icon: <Server className="text-brand-accent mb-4" size={32} />,
+      title: "Backend & APIs",
+      description: "Development of robust RESTful APIs, complex integrations, and microservices."
+    },
+    {
+      icon: <LayoutDashboard className="text-brand-accent mb-4" size={32} />,
+      title: "Administrative Systems",
+      description: "Creation of dashboards, control panels, and ERPs focusing on usability and performance."
+    },
+    {
+      icon: <Database className="text-brand-accent mb-4" size={32} />,
+      title: "Data Architecture",
+      description: "Database modeling, query optimization, and high-reliability financial systems."
+    }
   ];
 
-  const highlights = [
+  const highlights = lang === "pt" ? [
     "Desenvolvendo projetos acadêmicos e pessoais",
     "Foco na entrega de código limpo e manutenível",
     "Experiência com metodologias ágeis (Scrum/Kanban)",
     "Habilidade de traduzir regras de negócio para código",
     "Vibe Coding com IAs (Gemini, ChatGPT e Claude) para acelerar o desenvolvimento"
+  ] : [
+    "Developing academic and personal projects",
+    "Focus on delivering clean and maintainable code",
+    "Experience with agile methodologies (Scrum/Kanban)",
+    "Ability to translate business rules into code",
+    "Vibe Coding with AIs (Gemini, ChatGPT, and Claude) to accelerate development"
   ];
+
+  const t = {
+    pt: {
+      about: "Sobre",
+      me: "Mim",
+      focusTitle: "Desenvolvedora focada em",
+      focusHighlight: "Resultados Reais",
+      bio1: "Sou uma desenvolvedora apaixonada por construir soluções que resolvem problemas reais. Minha especialidade é criar sistemas robustos de ponta a ponta, conectando interfaces modernas em Next.js com backends sólidos e APIs eficientes.",
+      bio2: "Tenho experiência na arquitetura e desenvolvimento de sistemas financeiros, automações de processos e dashboards analíticos, sempre prezando pela segurança e performance do código."
+    },
+    en: {
+      about: "About",
+      me: "Me",
+      focusTitle: "Developer focused on",
+      focusHighlight: "Real Results",
+      bio1: "I am a developer passionate about building solutions that solve real problems. My specialty is creating robust end-to-end systems, connecting modern Next.js interfaces with solid backends and efficient APIs.",
+      bio2: "I have experience in the architecture and development of financial systems, process automation, and analytical dashboards, always prioritizing security and code performance."
+    }
+  };
+
+  const content = t[lang] || t.pt;
 
   return (
     <section id="about" className="py-24 relative">
@@ -40,7 +83,7 @@ export default function About() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4">Sobre <span className="text-brand-accent">Mim</span></h2>
+          <h2 className="text-4xl font-bold mb-4">{content.about} <span className="text-brand-accent">{content.me}</span></h2>
           <div className="w-24 h-1 bg-gradient-to-r from-brand-accent to-brand-hover mx-auto rounded-full"></div>
         </motion.div>
 
@@ -51,12 +94,12 @@ export default function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h3 className="text-3xl font-bold mb-6">Desenvolvedora focada em <br/><span className="text-brand-hover">Resultados Reais</span></h3>
+            <h3 className="text-3xl font-bold mb-6">{content.focusTitle} <br/><span className="text-brand-hover">{content.focusHighlight}</span></h3>
             <p className="text-white/70 text-lg leading-relaxed mb-6">
-              Sou uma desenvolvedora apaixonada por construir soluções que resolvem problemas reais. Minha especialidade é criar sistemas robustos de ponta a ponta, conectando interfaces modernas em Next.js com backends sólidos e APIs eficientes.
+              {content.bio1}
             </p>
             <p className="text-white/70 text-lg leading-relaxed mb-8">
-              Tenho experiência na arquitetura e desenvolvimento de sistemas financeiros, automações de processos e dashboards analíticos, sempre prezando pela segurança e performance do código.
+              {content.bio2}
             </p>
 
             <div className="space-y-4">

@@ -12,8 +12,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Portfólio | Isabelle Caroline",
-  description: "Portfólio moderno criado com Next.js e TailwindCSS",
+  title: 'Portfólio | Isabelle Caroline - Engenharia de Software',
+  description: 'Portfólio de uma estudante de Engenharia de Software focada em desenvolvimento Full Stack, Next.js e APIs REST.',
 };
 
 export default function RootLayout({ children }) {

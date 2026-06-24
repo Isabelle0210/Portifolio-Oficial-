@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 
-export default function Header() {
+export default function Header({ lang, toggleLang }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -17,12 +17,18 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
+  const navLinks = lang === "pt" ? [
     { name: "Início", href: "#" },
     { name: "Sobre", href: "#about" },
     { name: "Tecnologias", href: "#technologies" },
     { name: "Projetos", href: "#projects" },
     { name: "Contato", href: "#contact" },
+  ] : [
+    { name: "Home", href: "#" },
+    { name: "About", href: "#about" },
+    { name: "Technologies", href: "#technologies" },
+    { name: "Projects", href: "#projects" },
+    { name: "Contact", href: "#contact" },
   ];
 
   return (
@@ -45,7 +51,7 @@ export default function Header() {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex gap-8">
+        <nav className="hidden md:flex gap-8 items-center">
           {navLinks.map((link, index) => (
             <motion.div
               key={link.name}
@@ -61,6 +67,17 @@ export default function Header() {
               </Link>
             </motion.div>
           ))}
+          {/* Language Toggle Button */}
+          <motion.button
+            onClick={toggleLang}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: navLinks.length * 0.1 }}
+            className="px-3 py-1 rounded-full glass border border-brand-accent/30 text-xs font-bold text-brand-accent hover:bg-brand-accent hover:text-white transition-all cursor-pointer uppercase tracking-wider"
+            title={lang === "pt" ? "Change to English" : "Mudar para Português"}
+          >
+            {lang === "pt" ? "EN" : "PT"}
+          </motion.button>
         </nav>
 
         {/* Mobile Nav Toggle */}
@@ -79,7 +96,7 @@ export default function Header() {
         <motion.div 
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
-          className="md:hidden glass border-t-0 mt-4 absolute w-full left-0"
+          className="md:hidden glass border-t-0 mt-4 absolute w-full left-0 animate-fade-in"
         >
           <div className="flex flex-col items-center py-6 gap-6">
             {navLinks.map((link) => (
@@ -92,6 +109,16 @@ export default function Header() {
                 {link.name}
               </Link>
             ))}
+            {/* Language Toggle Button Mobile */}
+            <button
+              onClick={() => {
+                toggleLang();
+                setIsMobileMenuOpen(false);
+              }}
+              className="px-4 py-2 rounded-full glass border border-brand-accent/40 text-sm font-bold text-brand-accent hover:bg-brand-accent hover:text-white transition-all uppercase tracking-wider cursor-pointer"
+            >
+              {lang === "pt" ? "English (EN)" : "Português (PT)"}
+            </button>
           </div>
         </motion.div>
       )}

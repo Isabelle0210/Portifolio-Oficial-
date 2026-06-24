@@ -2,20 +2,20 @@
 
 import { motion } from "framer-motion";
 
-export default function Technologies() {
+export default function Technologies({ lang }) {
   const techs = [
-    { name: "Next.js", level: "Avançado", color: "from-black to-neutral-800" },
-    { name: "React.js", level: "Avançado", color: "from-blue-900 to-blue-600" },
-    { name: "Python", level: "Avançado", color: "from-yellow-700 to-yellow-500" },
-    { name: "Django", level: "Avançado", color: "from-green-900 to-emerald-800" },
-    { name: "Node.js", level: "Avançado", color: "from-green-900 to-green-600" },
-    { name: "TailwindCSS", level: "Avançado", color: "from-cyan-900 to-cyan-600" },
-    { name: "TypeScript", level: "Intermediário", color: "from-blue-800 to-blue-500" },
-    { name: "PostgreSQL", level: "Avançado", color: "from-indigo-900 to-indigo-600" },
-    { name: "APIs REST", level: "Especialista", color: "from-brand-secondary to-brand-accent" },
-    { name: "Docker", level: "Intermediário", color: "from-sky-900 to-sky-600" },
+    { name: "Next.js", level: lang === "pt" ? "Avançado" : "Advanced", color: "from-black to-neutral-800" },
+    { name: "React.js", level: lang === "pt" ? "Avançado" : "Advanced", color: "from-blue-900 to-blue-600" },
+    { name: "Python", level: lang === "pt" ? "Avançado" : "Advanced", color: "from-yellow-700 to-yellow-500" },
+    { name: "Django", level: lang === "pt" ? "Avançado" : "Advanced", color: "from-green-900 to-emerald-800" },
+    { name: "Node.js", level: lang === "pt" ? "Avançado" : "Advanced", color: "from-green-900 to-green-600" },
+    { name: "TailwindCSS", level: lang === "pt" ? "Avançado" : "Advanced", color: "from-cyan-900 to-cyan-600" },
+    { name: "TypeScript", level: lang === "pt" ? "Intermediário" : "Intermediate", color: "from-blue-800 to-blue-500" },
+    { name: "PostgreSQL", level: lang === "pt" ? "Avançado" : "Advanced", color: "from-indigo-900 to-indigo-600" },
+    { name: "APIs REST", level: lang === "pt" ? "Especialista" : "Expert", color: "from-brand-secondary to-brand-accent" },
+    { name: "Docker", level: lang === "pt" ? "Intermediário" : "Intermediate", color: "from-sky-900 to-sky-600" },
     { name: "Vibe Coding", level: "Gemini / Claude / GPT", color: "from-fuchsia-950 to-pink-600" },
-    { name: "Git & GitHub", level: "Avançado", color: "from-orange-950 to-red-600" }
+    { name: "Git & GitHub", level: lang === "pt" ? "Avançado" : "Advanced", color: "from-orange-950 to-red-600" }
   ];
 
   const containerVariants = {
@@ -37,6 +37,19 @@ export default function Technologies() {
     }
   };
 
+  const t = {
+    pt: {
+      stack: "Stack",
+      description: "As principais tecnologias e ferramentas que utilizo no meu dia a dia para construir aplicações escaláveis e performáticas."
+    },
+    en: {
+      stack: "Stack",
+      description: "The main technologies and tools I use on a daily basis to build scalable and performant applications."
+    }
+  };
+
+  const content = t[lang] || t.pt;
+
   return (
     <section id="technologies" className="py-24 bg-black/20">
       <div className="container mx-auto px-6">
@@ -47,10 +60,10 @@ export default function Technologies() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4">Tech <span className="text-brand-accent">Stack</span></h2>
+          <h2 className="text-4xl font-bold mb-4">Tech <span className="text-brand-accent">{content.stack}</span></h2>
           <div className="w-24 h-1 bg-gradient-to-r from-brand-accent to-brand-hover mx-auto rounded-full mb-8"></div>
           <p className="text-white/60 max-w-2xl mx-auto text-lg">
-            As principais tecnologias e ferramentas que utilizo no meu dia a dia para construir aplicações escaláveis e performáticas.
+            {content.description}
           </p>
         </motion.div>
 

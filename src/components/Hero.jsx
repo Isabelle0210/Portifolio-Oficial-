@@ -4,7 +4,30 @@ import { motion } from "framer-motion";
 import { ArrowRight, Terminal } from "lucide-react";
 import Link from "next/link";
 
-export default function Hero() {
+export default function Hero({ lang }) {
+  const t = {
+    pt: {
+      role: "Estudante de Engenharia de Software",
+      greeting: "Olá, eu sou a",
+      name: "Isabelle Caroline",
+      profession: "desenvolvedora.",
+      description: "Sou apaixonada por tecnologia e focada em desenvolver sistemas robustos usando Next.js, construindo APIs RESTful e aplicações de alta performance.",
+      btnProjects: "Ver Projetos",
+      btnContact: "Entrar em Contato"
+    },
+    en: {
+      role: "Software Engineering Student",
+      greeting: "Hi, I'm",
+      name: "Isabelle Caroline",
+      profession: "developer.",
+      description: "I'm passionate about technology and focused on developing robust systems using Next.js, building RESTful APIs and high-performance applications.",
+      btnProjects: "View Projects",
+      btnContact: "Get in Touch"
+    }
+  };
+
+  const content = t[lang] || t.pt;
+
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
       {/* Background decoration removed for performance */}
@@ -23,31 +46,31 @@ export default function Hero() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6 border border-brand-accent/30 text-brand-accent font-medium text-sm"
           >
             <Terminal size={16} />
-            <span>Estudante de Engenharia de Software</span>
+            <span>{content.role}</span>
           </motion.div>
 
           <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-6">
-            Olá, eu sou a <br />
+            {content.greeting} <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-brand-hover">
-              Isabelle Caroline
+              {content.name}
             </span> <br />
-            desenvolvedora.
+            {content.profession}
           </h1>
           
           <p className="text-lg text-white/70 mb-10 leading-relaxed max-w-xl">
-            Sou apaixonada por tecnologia e focada em desenvolver sistemas robustos usando Next.js, construindo APIs RESTful e aplicações de alta performance.
+            {content.description}
           </p>
 
           <div className="flex flex-wrap gap-4">
             <Link href="#projects">
-              <button className="bg-gradient-to-r from-brand-accent to-brand-hover text-white px-8 py-4 rounded-xl font-bold text-lg hover:shadow-[0_0_20px_rgba(254,89,194,0.4)] transition-all flex items-center gap-2 group">
-                Ver Projetos
+              <button className="bg-gradient-to-r from-brand-accent to-brand-hover text-white px-8 py-4 rounded-xl font-bold text-lg hover:shadow-[0_0_20px_rgba(254,89,194,0.4)] transition-all flex items-center gap-2 group cursor-pointer">
+                {content.btnProjects}
                 <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
               </button>
             </Link>
             <Link href="#contact">
-              <button className="px-8 py-4 rounded-xl font-bold text-lg glass glass-hover transition-all text-white">
-                Entrar em Contato
+              <button className="px-8 py-4 rounded-xl font-bold text-lg glass glass-hover transition-all text-white cursor-pointer">
+                {content.btnContact}
               </button>
             </Link>
           </div>

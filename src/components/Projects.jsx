@@ -4,22 +4,23 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ExternalLink, Code, Activity } from "lucide-react";
 
-export default function Projects() {
+export default function Projects({ lang }) {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // Mock API Call
   useEffect(() => {
     const fetchProjects = async () => {
+      setLoading(true);
       // Simulando tempo de resposta da API
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      const mockProjects = [
+      const mockProjects = lang === "pt" ? [
         {
           id: 1,
           title: "FinanceControl",
           description: "Aplicação web de controle financeiro pessoal com autenticação de usuários, criação/edição de transações categorizadas, gráficos mensais, suporte multilíngue e assistente de IA.",
-          image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          image: null,
           tags: ["React 19", "TypeScript", "Vite", "TailwindCSS", "Supabase"],
           liveUrl: "https://finance-control-25o3-git-main-isabelle0210s-projects.vercel.app/login",
           githubUrl: "https://github.com/Isabelle0210/FinanceControl"
@@ -51,6 +52,43 @@ export default function Projects() {
           liveUrl: "https://isabelle0210.github.io/Projeto-EcoPontos/",
           githubUrl: "https://github.com/Isabelle0210/Projeto-EcoPontos"
         }
+      ] : [
+        {
+          id: 1,
+          title: "FinanceControl",
+          description: "Personal financial control web application featuring user authentication, creation/edition of categorized transactions, monthly charts, multi-language support, and an AI assistant.",
+          image: null,
+          tags: ["React 19", "TypeScript", "Vite", "TailwindCSS", "Supabase"],
+          liveUrl: "https://finance-control-25o3-git-main-isabelle0210s-projects.vercel.app/login",
+          githubUrl: "https://github.com/Isabelle0210/FinanceControl"
+        },
+        {
+          id: 2,
+          title: "Zodiac Signs Project",
+          description: "Web application developed as an academic project to discover the user's zodiac sign based on birth date, dynamically processing data from an XML file.",
+          image: null,
+          tags: ["PHP", "XML", "Bootstrap 5", "Academic Project"],
+          liveUrl: "#",
+          githubUrl: "https://github.com/Isabelle0210/project-signos"
+        },
+        {
+          id: 3,
+          title: "Metrology & Scales API",
+          description: "High-availability microservice for direct communication with industrial weighing equipment, processing data in real time.",
+          image: "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+          tags: ["Node.js", "Express", "WebSocket", "Redis"],
+          liveUrl: "#",
+          githubUrl: "#"
+        },
+        {
+          id: 4,
+          title: "EcoPontos Project",
+          description: "Simple web project for environmental awareness and waste management, featuring waste registration by material type and a list of eco-points with maps from XML files.",
+          image: null,
+          tags: ["HTML5", "CSS3", "JavaScript", "XML", "Academic Project"],
+          liveUrl: "https://isabelle0210.github.io/Projeto-EcoPontos/",
+          githubUrl: "https://github.com/Isabelle0210/Projeto-EcoPontos"
+        }
       ];
       
       setProjects(mockProjects);
@@ -58,7 +96,24 @@ export default function Projects() {
     };
 
     fetchProjects();
-  }, []);
+  }, [lang]);
+
+  const t = {
+    pt: {
+      title: "Projetos em",
+      highlight: "Destaque",
+      description: "Aplicações reais que resolvem problemas reais. De sistemas financeiros complexos a integrações industriais de baixa latência.",
+      loading: "Carregando projetos via API..."
+    },
+    en: {
+      title: "Featured",
+      highlight: "Projects",
+      description: "Real applications solving real problems. From complex financial systems to low-latency industrial integrations.",
+      loading: "Loading projects via API..."
+    }
+  };
+
+  const content = t[lang] || t.pt;
 
   return (
     <section id="projects" className="py-24 relative">
@@ -72,17 +127,17 @@ export default function Projects() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4">Projetos em <span className="text-brand-accent">Destaque</span></h2>
+          <h2 className="text-4xl font-bold mb-4">{content.title} <span className="text-brand-accent">{content.highlight}</span></h2>
           <div className="w-24 h-1 bg-gradient-to-r from-brand-accent to-brand-hover mx-auto rounded-full mb-8"></div>
           <p className="text-white/60 max-w-2xl mx-auto text-lg">
-            Aplicações reais que resolvem problemas reais. De sistemas financeiros complexos a integrações industriais de baixa latência.
+            {content.description}
           </p>
         </motion.div>
 
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20">
             <Activity className="animate-spin text-brand-accent mb-4" size={40} />
-            <p className="text-brand-accent font-medium">Carregando projetos via API...</p>
+            <p className="text-brand-accent font-medium">{content.loading}</p>
           </div>
         ) : (
           <div className="grid lg:grid-cols-3 gap-8">

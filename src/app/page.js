@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -6,21 +9,22 @@ import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
-export const metadata = {
-  title: 'Portfólio | Isabelle Caroline - Engenharia de Software',
-  description: 'Portfólio de uma estudante de Engenharia de Software focada em desenvolvimento Full Stack, Next.js e APIs REST.',
-}
-
 export default function Home() {
+  const [lang, setLang] = useState("pt");
+
+  const toggleLang = () => {
+    setLang((prev) => (prev === "pt" ? "en" : "pt"));
+  };
+
   return (
     <main className="min-h-screen bg-transparent text-white font-sans selection:bg-brand-accent selection:text-white">
-      <Header />
-      <Hero />
-      <About />
-      <Technologies />
-      <Projects />
-      <Contact />
-      <Footer />
+      <Header lang={lang} toggleLang={toggleLang} />
+      <Hero lang={lang} />
+      <About lang={lang} />
+      <Technologies lang={lang} />
+      <Projects lang={lang} />
+      <Contact lang={lang} />
+      <Footer lang={lang} />
     </main>
   );
 }
