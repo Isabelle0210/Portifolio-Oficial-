@@ -22,7 +22,7 @@ export default function Projects({ lang }) {
           description: "Aplicação web de controle financeiro pessoal com autenticação de usuários, criação/edição de transações categorizadas, gráficos mensais, suporte multilíngue e assistente de IA.",
           image: null,
           tags: ["React 19", "TypeScript", "Vite", "TailwindCSS", "Supabase"],
-          liveUrl: "https://finance-control-25o3-git-main-isabelle0210s-projects.vercel.app/login",
+          liveUrl: "https://finance-control-25o3.vercel.app/",
           githubUrl: "https://github.com/Isabelle0210/FinanceControl"
         },
         {
@@ -59,7 +59,7 @@ export default function Projects({ lang }) {
           description: "Personal financial control web application featuring user authentication, creation/edition of categorized transactions, monthly charts, multi-language support, and an AI assistant.",
           image: null,
           tags: ["React 19", "TypeScript", "Vite", "TailwindCSS", "Supabase"],
-          liveUrl: "https://finance-control-25o3-git-main-isabelle0210s-projects.vercel.app/login",
+          liveUrl: "https://finance-control-25o3.vercel.app/",
           githubUrl: "https://github.com/Isabelle0210/FinanceControl"
         },
         {
